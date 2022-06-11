@@ -22,12 +22,12 @@ String 객체는 조회만 가능하고 변경할 수 없는 **불변(immutable)
 
 ### String 생성 방법
 
-1. String literal, `""`
+1. String literal, `" "`
 2. `new` 연산자
 
 #### Java String Pool
 
-String literal로 생성하면 해당 문자열은 Heap 영역 내 **String Constan Pool**에 저장되어 재사용되지만,
+String literal로 생성하면 해당 문자열은 Heap 영역 내 **String Constant Pool**에 저장되어 재사용되지만,
 `new` 연산자로 생성하면 여러 개의 객체가 각각 Heap 영역을 차지하게 된다.
 
 <br>
@@ -39,7 +39,8 @@ String literal로 생성하면 해당 문자열은 Heap 영역 내 **String Cons
 단순 문자열 참조, 탐색, 검색을 자주할 때 좋다.
 
 ```java
-String string = new String("B");
+// String string = new String("B");
+String string = "B";
 string = string.concat("y");
 string = string.concat("e");
 ```
