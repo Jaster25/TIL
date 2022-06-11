@@ -62,7 +62,7 @@ public static void swapByNestedReference(CustomInt a, CustomInt b) {
 @DisplayName("Swap - call by nested reference: 변한다.")
 @Test
 public void callByNestedReferenceTest() {
-	CustomInt a = new CustomInt(1);
+  CustomInt a = new CustomInt(1);
   CustomInt b = new CustomInt(2);
   swapByNestedReference(a, b);
   assertEquals(2, a.number);
