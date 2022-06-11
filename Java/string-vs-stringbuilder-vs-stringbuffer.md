@@ -25,7 +25,7 @@ String 객체는 조회만 가능하고 변경할 수 없는 **불변(immutable)
 1. String literal, `" "`
 2. `new` 연산자
 
-#### Java String Pool
+#### String Constant Pool
 
 String literal로 생성하면 해당 문자열은 Heap 영역 내 **String Constant Pool**에 저장되어 재사용되지만,
 `new` 연산자로 생성하면 여러 개의 객체가 각각 Heap 영역을 차지하게 된다.
@@ -64,6 +64,45 @@ StringBuffer stringBuffer = new StringBuffer("B");
 stringBuffer.append("y");
 stringBuffer.append("e");
 ```
+
+<br>
+
+<hr>
+
+<br>
+
+### `new` 연산자로 선언한 문자열은 String Constant Pool에 저장되지 않는다.
+
+```java
+public class StringConstantPoolTest {
+    // intern() 메서드를 활용하면 Java String Pool에 존재하는 String을 가져올 수 있다.
+    @DisplayName("String Literal 선언끼리는 같은 주소를 참조한다.")
+    @Test
+    public void checkBetweenStringLiteral() {
+        String declareByStringLiteral1 = "Hello";
+        String declareByStringLiteral2 = "Hello";
+        assertEquals(System.identityHashCode(declareByStringLiteral1), System.identityHashCode(declareByStringLiteral2));
+    }
+
+    @DisplayName("String Literal 선언 후 new 선언은 다른 주소를 참조한다.")
+    @Test
+    public void checkStringLiteralAndNew() {
+        String declareByStringLiteral = "Hello";
+        String declareByNew = new String("Hello");
+        assertNotEquals(System.identityHashCode(declareByStringLiteral), System.identityHashCode(declareByNew));
+    }
+
+    @DisplayName("new 선언 후 String Literal 선언은 다른 주소를 갖는다.")
+    @Test
+    public void checkNewAndStringLiteral() {
+        String declareByNew = new String("Hello");
+        String declareByStringLiteral = "Hello";
+        assertNotEquals(System.identityHashCode(declareByStringLiteral), System.identityHashCode(declareByNew));
+    }
+}
+```
+
+![string-pool-test](../resources/images/string-pool-test.png)
 
 <br>
 
