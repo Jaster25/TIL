@@ -92,7 +92,7 @@ public class StringConstantPoolTest {
         assertNotEquals(System.identityHashCode(declareByStringLiteral), System.identityHashCode(declareByNew));
     }
 
-    @DisplayName("new 선언 후 String Literal 선언은 다른 주소를 갖는다.")
+    @DisplayName("new 선언 후 String Literal 선언은 다른 주소를 참조한다.")
     @Test
     public void checkNewAndStringLiteral() {
         String declareByNew = new String("Hello");
