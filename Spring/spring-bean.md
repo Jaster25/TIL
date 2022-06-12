@@ -26,9 +26,9 @@
 ```java
 @Component
 public class Hello {
-  public Hello() {
-    System.out.println("Hello");
-  }
+    public Hello() {
+       System.out.println("Hello");
+    }
 }
 ```
 
@@ -41,10 +41,10 @@ public class Hello {
 ```java
 @Configuration
 public class HelloConfiguration {
-	@Bean
-	public void hello() {
-    System.out.println("Hello");
-	}
+    @Bean
+    public void hello() {
+       System.out.println("Hello");
+    }
 }
 ```
 
