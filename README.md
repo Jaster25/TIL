@@ -27,20 +27,18 @@
 
 - [JPA](JPA/jpa.md)
 
-## 네트워크
+## Network
 
 - [HTTP](Network/http.md)
 
-<!-- ## OOP -->
-
-<!-- ## 운영체제 -->
-
-## 자료구조
+## Data Structure
 
 - [배열 vs 연결 리스트](Datastructure/array-vs-linkedlist.md)
 
-<!-- ## 알고리즘 -->
+<!-- ## Algorithm -->
+<!-- ## Operation System -->
+<!-- ## OOP -->
 
-<!-- ## 개발 서적 -->
+## Books
 
-<!-- - [Effective Java](#Books/Effective_Java) -->
+- [Effective Java](#Books/Effective_Java)
