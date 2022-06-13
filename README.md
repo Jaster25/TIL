@@ -27,6 +27,7 @@
 ### JPA
 
 - [JPA](JPA/jpa.md)
+- [영속성 컨텍스트](JPA/persistence-context.md)
 
 ## Network
 
