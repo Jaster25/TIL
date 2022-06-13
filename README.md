@@ -11,6 +11,7 @@
 
 - [Java 애플리케이션 실행과정](Java/java-application-execution-process.md)
 - [Java 빌드 도구](Java/build-tools.md)
+- [Error & Exception](Java/error-exception.md)
 - [기본 자료형 vs 참조 자료형](Java/primitive-type-vs-reference-type.md)
 - [동일성 vs 동등성](Java/identity-vs-equality.md)
 - [String vs StringBuilder vs StringBuffer](Java/string-vs-stringbuilder-vs-stringbuffer.md)
