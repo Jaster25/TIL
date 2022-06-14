@@ -1,7 +1,5 @@
 # Today I Learned
 
-<br>
-
 ## Global
 
 - [Call by Value vs Call by Reference](Global/call-by-value-vs-call-by-reference.md)
@@ -24,10 +22,14 @@
 - [의존성 주입](Spring/dependency-injection.md)
 - [POJO](Spring/pojo.md)
 
-### JPA
+#### JPA
 
 - [JPA](JPA/jpa.md)
 - [영속성 컨텍스트](JPA/persistence-context.md)
+
+#### MSA
+
+- [RestTemplate vs FeignClient](Spring/MSA/resttemplate-vs-feignclient.md)
 
 ## Network
 
