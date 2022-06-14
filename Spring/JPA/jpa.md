@@ -1,8 +1,4 @@
-# JPA란?
-
-> Java Persistence API
-
-<br>
+# JPA(Java Persistence API)
 
 JPA는 자바 표준 **ORM** 프레임워크이다.
 

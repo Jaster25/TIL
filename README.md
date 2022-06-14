@@ -24,8 +24,8 @@
 
 #### JPA
 
-- [JPA](JPA/jpa.md)
-- [영속성 컨텍스트](JPA/persistence-context.md)
+- [JPA](Spring/JPA/jpa.md)
+- [영속성 컨텍스트](Spring/JPA/persistence-context.md)
 
 #### MSA
 
