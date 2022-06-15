@@ -43,6 +43,7 @@
 ## Data Structure
 
 - [배열 vs 연결 리스트](Datastructure/array-vs-linkedlist.md)
+- [스택 vs 큐](Datastructure/stack-vs-queue.md)
 
 <!-- ## Algorithm -->
 <!-- ## Operation System -->
