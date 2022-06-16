@@ -4,6 +4,7 @@
 
 - [Call by Value vs Call by Reference](Global/call-by-value-vs-call-by-reference.md)
 - [라이브러리 vs 프레임워크](Global/library-vs-framework.md)
+- [동기 vs 비동기](Global/synchronous-vs-asynchronous.md)
 
 ## Java
 
