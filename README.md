@@ -36,6 +36,7 @@
 
 - [HTTP](Network/http.md)
 - [HTTP status code](Network/http-status-code.md)
+- [HTTP method](Network/http-method.md)
 - [URI & URL & URN](Network/uri-url-urn.md)
 
 ## Database
