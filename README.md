@@ -49,7 +49,10 @@
 - [배열 vs 연결 리스트](Datastructure/array-vs-linkedlist.md)
 - [스택 vs 큐](Datastructure/stack-vs-queue.md)
 
-<!-- ## Algorithm -->
+## Algorithm
+
+- [최소 신장 트리](Algorithm/minimum-spanning-tree.md)
+
 <!-- ## Operation System -->
 
 ## OOP
