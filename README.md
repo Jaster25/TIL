@@ -30,6 +30,10 @@
 - [JPA](Spring/JPA/jpa.md)
 - [영속성 컨텍스트](Spring/JPA/persistence-context.md)
 
+#### Test
+
+- [테스트 코드 적용하기(JUnit, TDD)](Spring/Test/apply-test-code-with-junit.md)
+
 #### MSA
 
 - [RestTemplate vs FeignClient](Spring/MSA/resttemplate-vs-feignclient.md)
