@@ -30,6 +30,7 @@
 
 - [JPA](Spring/JPA/jpa.md)
 - [영속성 컨텍스트](Spring/JPA/persistence-context.md)
+- [엔티티의 생명주기](Spring/JPA/entity-lifecycle.md)
 
 #### Test
 
