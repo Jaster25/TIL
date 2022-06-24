@@ -22,7 +22,7 @@ RestTemplate과 FeignClient는 마이크로 서비스 간의 통신에 사용하
 - 스프링 3.0부터 제공하는 HTTP 통신 템플릿으로 spring-boot-starter-web에 포함되어 있다.
   ```java
   dependencies {
-  		implementation "org.springframework.boot:spring-boot-starter-web"
+      implementation "org.springframework.boot:spring-boot-starter-web"
   }
   ```
 - RESTful 형식에 맞추어져 있다.
@@ -36,7 +36,7 @@ RestTemplate과 FeignClient는 마이크로 서비스 간의 통신에 사용하
 - Spring Cloud Netflix에서 제공하는 라이브러리
   ```java
   dependencies {
-  		implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
+      implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
   }
   ```
 - **인터페이스**와 **애노테이션**을 사용하여 코드가 깔끔하다.
