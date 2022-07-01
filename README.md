@@ -31,10 +31,11 @@
 - [JPA](Spring/JPA/jpa.md)
 - [영속성 컨텍스트](Spring/JPA/persistence-context.md)
 - [엔티티의 생명주기](Spring/JPA/entity-lifecycle.md)
+- [유튜브 - Spring Data JPA 기초](Spring/JPA/spring-data-jpa-basics.md)
 
 #### Test
 
-- [테스트 코드 적용하기(JUnit, TDD)](Spring/Test/apply-test-code-with-junit.md)
+- [유튜브 - 테스트 코드 적용하기(JUnit, TDD)](Spring/Test/apply-test-code-with-junit.md)
 
 #### MSA
 
