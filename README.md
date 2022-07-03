@@ -51,6 +51,7 @@
 ## Database
 
 - [Key](Database/key.md)
+- [SQL vs NoSQL](Database/sql-vs-nosql.md)
 
 ## Data Structure
 
@@ -65,7 +66,7 @@
 
 ## OOP
 
-- [객체 지향 프로그래밍 입문](OOP/객체_지향_프로그래밍_입문.md)
+- [인프런 - 객체 지향 프로그래밍 입문](OOP/객체_지향_프로그래밍_입문.md)
 
 ## Books
 
