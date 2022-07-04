@@ -47,6 +47,7 @@
 - [HTTP status code](Network/http-status-code.md)
 - [HTTP method](Network/http-method.md)
 - [URI & URL & URN](Network/uri-url-urn.md)
+- [REST API](Network/rest-api.md)
 
 ## Database
 
