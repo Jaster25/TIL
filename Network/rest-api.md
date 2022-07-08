@@ -97,6 +97,17 @@ HTTP를 잘 활용하기 위한 하나의 표준화된 아키텍처 스타일로
 
 <br>
 
+## REST API의 문제점
+
+- Over Fetching
+  - 필요한 데이터보다 많은 데이터를 가져옴
+- Under Fetching
+  - 필요한 데이터보다 적은 데이터를 가져옴
+
+위 문제들을 해결하기 위해 Meta(구 Facebook)에서 **GraphQL**을 만들었다.
+
+<br>
+
 ## 📚 Reference
 
 - https://restfulapi.net/resource-naming/
