@@ -30,6 +30,7 @@
 #### JPA
 
 - [JPA](Spring/JPA/jpa.md)
+- [JPA vs MyBatis](Spring/JPA/jpa-vs-mybatis.md)
 - [영속성 컨텍스트](Spring/JPA/persistence-context.md)
 - [엔티티의 생명주기](Spring/JPA/entity-lifecycle.md)
 - [JPA에서 엔티티를 수정하는 방법](Spring/JPA/how-to-update-entity.md)
