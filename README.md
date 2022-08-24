@@ -58,16 +58,17 @@
 - [Key](Database/key.md)
 - [SQL vs NoSQL](Database/sql-vs-nosql.md)
 
-## Data Structure
-
-- [배열 vs 연결 리스트](Datastructure/array-vs-linkedlist.md)
-- [스택 vs 큐](Datastructure/stack-vs-queue.md)
-
 ## DevOps
 
 - [On-premise vs Cloud](DevOps/on-premise-vs-cloud.md)
 - [IaaS vs PaaS vs SaaS](DevOps/iaas-paas-saas.md)
 - [Scale Up vs Scale Out & In](DevOps/scale-up-vs-scale-out-in.md)
+
+## Data Structure
+
+- [배열 vs 연결 리스트](Datastructure/array-vs-linkedlist.md)
+- [스택 vs 큐](Datastructure/stack-vs-queue.md)
+- [Trie](Datastructure/trie.md)
 
 ## Algorithm
 
