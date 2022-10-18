@@ -5,7 +5,7 @@
 - [Call by Value vs Call by Reference](Global/call-by-value-vs-call-by-reference.md)
 - [라이브러리 vs 프레임워크](Global/library-vs-framework.md)
 - [매개변수 vs 인자](Global/parameter-vs-argument.md)
-- [동기 vs 비동기](Global/synchronous-vs-asynchronous.md)
+- [동기 vs 비동기, 블로킹 vs 논블로킹](Global/sync-async-blocking-non-blocking.md)
 - [JWT](Global/jwt.md)
 - [인터프리터 vs 컴파일러](Global/interpreter-compiler.md)
 
