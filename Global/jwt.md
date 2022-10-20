@@ -20,7 +20,9 @@ JWT는 Header, Payload, Signature 3개의 영역으로 이루어지며 모두 Ba
 
 <br>
 
-## Header
+## JWT 구성 요소
+
+### Header
 
 토큰 타입과 토큰 생성에 사용된 알고리즘이 담겨있다.
 
@@ -33,7 +35,7 @@ JWT는 Header, Payload, Signature 3개의 영역으로 이루어지며 모두 Ba
 
 <br>
 
-## Payload
+### Payload
 
 토큰에 사용된 Claim 정보들이 Key-Value 형태로 담겨있다.
 
@@ -64,7 +66,7 @@ JWT는 Header, Payload, Signature 3개의 영역으로 이루어지며 모두 Ba
 
 <br>
 
-## Signature
+### Signature
 
 서명은 토큰을 인코딩하거나 유효성 검증을 할 때 사용하는 고유한 암호화 코드이다.
 
@@ -80,7 +82,44 @@ HMACSHA256(
 
 <br>
 
-## 참고
+## JWT 장단점
+### 장점
+- 확장성
+- 데이터 변조가 어렵다.
+- 인증을 위한 별도의 저장 공간이 필요없다.
+### 단점
+- 토큰의 길이가 짧지 않고, 인증 과정이 필요해서 서버에 부담이 될 수 있다.
+- 발급된 토큰이 탈취되면 곤란해진다.
 
+<br>
+
+## JWT 저장 위치
+보안과 관련된 JWT의 저장 위치는 매우 중요하다.
+
+### 보안 위협 종류
+- XSS(Cross Site Scripting)
+    > CSS는 기존에 쓰이는 약자가 존재해서 XSS라 명칭
+    - 웹 서비스에 악의적인 JavaScript 같은 스크립트 코드를 삽입하는 공격
+- CSRF(Cross Site Request Forgery)
+    - 정상적인 요청을 가로채고 위조하여 서버에 변조된 Request를 보내는 공격
+
+
+### Cookie에 저장
+- XSS 공격에 LocalStorage 보다는 안전
+    - `HttpOnly` 설정으로 JavaScript 접근을 막을 수 있다.
+- CSRF 공격에 취약
+    - HTTP Request에 항상 담겨 보내지기 때문에 경로를 알면 위험해진다.
+
+### LocalStorage에 저장
+- CSRF 공격에 안전
+    - HTTP 헤더에 담겨 보내지기 때문에 XSS를 뚫지 않는 이상 위조하기 어렵다.
+- XSS 공격에 취약
+    - LocalStorage에 접근하는 스크립트 코드를 삽입하면 위헙해진다.
+
+
+<br>
+
+## 📚 References
 - https://jwt.io/
 - https://velopert.com/2389
+- [https://velog.io/@0307kwon/JWT는-어디에-저장해야할까-localStorage-vs-cookie](https://velog.io/@0307kwon/JWT%EB%8A%94-%EC%96%B4%EB%94%94%EC%97%90-%EC%A0%80%EC%9E%A5%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C-localStorage-vs-cookie)
