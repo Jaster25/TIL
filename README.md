@@ -12,6 +12,7 @@
 ## Java
 
 - [Java 애플리케이션 실행과정](Java/java-application-execution-process.md)
+- [JDK, JRE, JVM](Java/jdk-jre-jvm.md)
 - [Java 빌드 도구](Java/build-tools.md)
 - [Error & Exception](Java/error-exception.md)
 - [기본 자료형 vs 참조 자료형](Java/primitive-type-vs-reference-type.md)
