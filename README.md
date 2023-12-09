@@ -1,13 +1,20 @@
 # Today I Learned
 
-## Global
+## Books
 
-- [Call by Value vs Call by Reference](Global/call-by-value-vs-call-by-reference.md)
-- [라이브러리 vs 프레임워크](Global/library-vs-framework.md)
-- [매개변수 vs 인자](Global/parameter-vs-argument.md)
-- [동기 vs 비동기, 블로킹 vs 논블로킹](Global/sync-async-blocking-non-blocking.md)
-- [JWT](Global/jwt.md)
-- [인터프리터 vs 컴파일러](Global/interpreter-compiler.md)
+- [Effective Java](Books/Effective_Java)
+- [Clean Code](Books/Clean_Code)
+
+## Architecture
+
+#### OOP
+
+- [객체지향 설계 5가지 원칙(SOLID)](Architecture/OOP/solid.md)
+- [강의 - 객체 지향 프로그래밍 입문](Architecture/OOP/객체_지향_프로그래밍_입문.md)
+
+#### Design Pattern
+
+- [강의 - Java로 보는 GoF의 디자인 패턴 강좌](Architecture/DesignPattern/Java로_보는_GoF의_디자인_패턴_강좌.md)
 
 ## Java
 
@@ -37,11 +44,11 @@
 - [영속성 컨텍스트](Spring/JPA/persistence-context.md)
 - [엔티티의 생명주기](Spring/JPA/entity-lifecycle.md)
 - [JPA에서 엔티티를 수정하는 방법](Spring/JPA/how-to-update-entity.md)
-- [유튜브 - Spring Data JPA 기초](Spring/JPA/spring-data-jpa-basics.md)
+- [강의 - Spring Data JPA 기초](Spring/JPA/spring-data-jpa-basics.md)
 
 #### Test
 
-- [유튜브 - 테스트 코드 적용하기(JUnit, TDD)](Spring/Test/apply-test-code-with-junit.md)
+- [강의 - 테스트 코드 적용하기(JUnit, TDD)](Spring/Test/apply-test-code-with-junit.md)
 
 #### MSA
 
@@ -80,12 +87,11 @@
 
 <!-- ## Operation System -->
 
-## OOP
+## Global
 
-- [객체지향 설계 5가지 원칙(SOLID)](OOP/solid.md)
-- [인프런 - 객체 지향 프로그래밍 입문](OOP/객체_지향_프로그래밍_입문.md)
-
-## Books
-
-- [Effective Java](Books/Effective_Java)
-- [Clean Code](Books/Clean_Code)
+- [Call by Value vs Call by Reference](Global/call-by-value-vs-call-by-reference.md)
+- [라이브러리 vs 프레임워크](Global/library-vs-framework.md)
+- [매개변수 vs 인자](Global/parameter-vs-argument.md)
+- [동기 vs 비동기, 블로킹 vs 논블로킹](Global/sync-async-blocking-non-blocking.md)
+- [JWT](Global/jwt.md)
+- [인터프리터 vs 컴파일러](Global/interpreter-compiler.md)
