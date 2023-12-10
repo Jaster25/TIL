@@ -189,6 +189,79 @@ Item{name='HDD', cost=50}
 
 <br>
 
+## 3강. Strategy
+
+> 전략 패턴
+
+- 어떤 하나의 기능을 구성하는 특정 부분을 실행 중에 다른 것으로 효과적으로 변경할 수 있는 패턴
+- (필요할 때 전략을 바꿀 수 있는)
+
+### 실습 클래스 다이어그램
+
+![strategy](https://imgur.com/RaG06UW.png)
+
+### 실습 코드
+
+```java
+public class SumPrinter {
+    void print(SumStrategy strategy, int n) {
+        System.out.printf("The sum of 1 - %d: ", n);
+        System.out.println(strategy.get(n));
+    }
+}
+```
+
+```java
+public interface SumStrategy {
+    int get(int n);
+}
+```
+
+```java
+public class SimpleSumStrategy implements SumStrategy {
+    @Override
+    public int get(int n) {
+        int sum = n;
+        for (long i = 1; i < n; i++) {
+            sum += i;
+        }
+        return sum;
+    }
+}
+```
+
+```java
+public class GaussSumStrategy implements SumStrategy {
+    @Override
+    public int get(int n) {
+        return (n + 1) * n / 2;
+    }
+}
+```
+
+```java
+public class MainEntry {
+    public static void main(String[] args) {
+        SumPrinter cal = new SumPrinter();
+
+        cal.print(new SimpleSumStrategy(), 10);
+        cal.print(new GaussSumStrategy(), 10);
+    }
+}
+```
+
+```
+> Task :MainEntry.main()
+The sum of 1 - 10: 55
+The sum of 1 - 10: 55
+```
+
+### Strategy 패턴 핵심
+
+하나의 기능에 대해서 서로 다른 방식의 구현을 실행 중에 변경할 수 있는 패턴
+
+<br>
+
 ## 📚 References
 
 - [유튜브 - Java로 보는 GoF의 디자인 패턴 강좌](https://www.youtube.com/playlist?list=PLe6NQuuFBu7FhPfxkjDd2cWnTy2y_w_jZ)
