@@ -45,6 +45,7 @@
 - [엔티티의 생명주기](Spring/JPA/entity-lifecycle.md)
 - [JPA에서 엔티티를 수정하는 방법](Spring/JPA/how-to-update-entity.md)
 - [강의 - Spring Data JPA 기초](Spring/JPA/spring-data-jpa-basics.md)
+- [Entity ID를 참조 타입으로 사용하는 이유](Spring/JPA/why-entity-id–use-reference-type.md)
 
 #### Test
 
