@@ -67,11 +67,11 @@ Aggregator: 동일한 데이터의 집합
 
 구성 데이터를 얻는 방법을 통일된 하나의 방법으로 가져오기 위한 패턴
 
-### 클래스 다이어그램
-
-클래스 다이어그램: 클래스 간의 관계를 나타내는 다이어그램으로 UML에서 정의한 다이어그램
+### 실습 클래스 다이어그램
 
 ![class-diagram](https://imgur.com/IUgcFhN.png)
+
+클래스 다이어그램: 클래스 간의 관계를 나타내는 다이어그램으로 UML에서 정의한 다이어그램
 
 ### 실습 코드
 
@@ -193,8 +193,8 @@ Item{name='HDD', cost=50}
 
 > 전략 패턴
 
-- 어떤 하나의 기능을 구성하는 특정 부분을 실행 중에 다른 것으로 효과적으로 변경할 수 있는 패턴
-- (필요할 때 전략을 바꿀 수 있는)
+어떤 하나의 기능을 구성하는 특정 부분을 실행 중에 다른 것으로 효과적으로 변경할 수 있는 패턴
+(필요할 때 전략을 바꿀 수 있는)
 
 ### 실습 클래스 다이어그램
 
@@ -259,6 +259,160 @@ The sum of 1 - 10: 55
 ### Strategy 패턴 핵심
 
 하나의 기능에 대해서 서로 다른 방식의 구현을 실행 중에 변경할 수 있는 패턴
+
+<br>
+
+## 4강. Template
+
+어떤 기능에 대해서 실행되어야 할 각 단계는 정해져있으나, 각각의 세부 구현은 상황에 맞게 다르게 구현할 수 있도록 하는 패턴.
+
+### 실습 클래스 다이어그램
+
+![template](https://imgur.com/t4y8Lfu.png)
+
+### 실습 코드
+
+```java
+import java.util.ArrayList;
+
+public class Article {
+    private String title;
+    private ArrayList<String> content;
+    private String footer;
+
+    public Article(String title, ArrayList<String> content, String footer) {
+        this.title = title;
+        this.content = content;
+        this.footer = footer;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public ArrayList<String> getContent() {
+        return content;
+    }
+
+    public String getFooter() {
+        return footer;
+    }
+}
+```
+
+```java
+public abstract class DisplayArticleTemplate {
+    protected Article article;
+
+    public DisplayArticleTemplate(Article article) {
+        this.article = article;
+    }
+
+    public final void display() {
+        title();
+        content();
+        footer();
+    }
+
+    protected abstract void title();
+    protected abstract void content();
+    protected abstract void footer();
+}
+```
+
+```java
+import java.util.ArrayList;
+
+public class SimpleDisplayArticle extends DisplayArticleTemplate {
+    public SimpleDisplayArticle(Article article) {
+        super(article);
+    }
+
+    @Override
+    protected void title() {
+        System.out.println(article.getTitle());
+    }
+
+    @Override
+    protected void content() {
+        ArrayList<String> content = article.getContent();
+        for (String s : content) {
+            System.out.println(s);
+        }
+    }
+
+    @Override
+    protected void footer() {
+        System.out.println(article.getFooter());
+    }
+}
+```
+
+```java
+import java.util.ArrayList;
+
+public class CaptionDisplayArticle extends DisplayArticleTemplate {
+    public CaptionDisplayArticle(Article article) {
+        super(article);
+    }
+
+    @Override
+    protected void title() {
+        System.out.println("TITLE: " + article.getTitle());
+    }
+
+    @Override
+    protected void content() {
+        System.out.println("CONTENT");
+        ArrayList<String> content = article.getContent();
+        for (String s : content) {
+            System.out.println("    " + s);
+        }
+    }
+
+    @Override
+    protected void footer() {
+        System.out.println("FOOTER: " + article.getFooter());
+    }
+}
+```
+
+```java
+public class MainEntry {
+    public static void main(String[] args) {
+        String title = " 디자인 패턴";
+        ArrayList<String> content = new ArrayList<>();
+        content.add("1장. 디자인 패턴이란");
+        content.add("2장. 디자인 패턴 종류");
+        String footer = "2023.12.12";
+
+        Article article = new Article(title, content, footer);
+
+        System.out.println("[CASE-1]");
+        DisplayArticleTemplate template1 = new SimpleDisplayArticle(article);
+        template1.display();
+
+        System.out.println("[CASE-2]");
+        DisplayArticleTemplate template2 = new CaptionDisplayArticle(article);
+        template2.display();
+    }
+}
+```
+
+```
+> Task :MainEntry.main()
+[CASE-1]
+ 디자인 패턴
+1장. 디자인 패턴이란
+2장. 디자인 패턴 종류
+2023.12.12
+[CASE-2]
+TITLE:  디자인 패턴
+CONTENT
+    1장. 디자인 패턴이란
+    2장. 디자인 패턴 종류
+FOOTER: 2023.12.12
+```
 
 <br>
 
