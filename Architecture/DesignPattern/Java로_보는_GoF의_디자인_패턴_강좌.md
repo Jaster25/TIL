@@ -416,6 +416,127 @@ FOOTER: 2023.12.12
 
 <br>
 
+## 5강. Adapter
+
+Adapter: 원하는 형태로 변환해 주는 장치
+
+### 실습 클래스 다이어그램
+
+![Adapter](https://imgur.com/6awVUai.png)
+
+> Tiger 클래스는 코드를 변경할 수 없어 그대로 사용해야 하는 상황
+
+### 실습 코드
+
+```java
+public abstract class Animal {
+    protected String name;
+
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    public abstract void sound();
+}
+```
+
+```java
+public class Dog extends Animal {
+    public Dog(String name) {
+        super(name);
+    }
+
+    @Override
+    public void sound() {
+        System.out.println(name + " Barking");
+    }
+}
+```
+
+```java
+public class Cat extends Animal {
+    public Cat(String name) {
+        super(name);
+    }
+
+    @Override
+    public void sound() {
+        System.out.println(name + " Meow");
+    }
+}
+```
+
+```java
+public class Tiger {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    void roar() {
+        System.out.println("Growl");
+    }
+}
+
+```
+
+```java
+public class TigerAdapter extends Animal {
+    private Tiger tiger;
+
+    public TigerAdapter(String name) {
+        super(name);
+
+        tiger = new Tiger();
+        tiger.setName("name");
+    }
+
+    @Override
+    public void sound() {
+        System.out.print(tiger.getName() + " ");
+        tiger.roar();
+    }
+}
+```
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class User {
+
+    public static void main(String[] args) {
+        List<Animal> animals = new ArrayList<>();
+        animals.add(new Dog("댕댕이"));
+        animals.add(new Cat("냥이1"));
+        animals.add(new Cat("냥이2"));
+
+        // animals.add(new Tiger("사나운냥이"));
+        animals.add(new TigerAdapter("사나운냥이"));
+
+        animals.forEach(Animal::sound);
+    }
+}
+
+```
+
+```
+> Task :User.main()
+댕댕이 Barking
+냥이1 Meow
+냥이2 Meow
+name Growl
+```
+
+변경할 수 없는 클래스를 원하는 형태의 인터페이스나 클래스로 사용하고자 할 때 Adapter 클래스를 도입하여 사용할 수 있다.
+
+<br>
+
 ## 📚 References
 
 - [유튜브 - Java로 보는 GoF의 디자인 패턴 강좌](https://www.youtube.com/playlist?list=PLe6NQuuFBu7FhPfxkjDd2cWnTy2y_w_jZ)
