@@ -264,7 +264,7 @@ The sum of 1 - 10: 55
 
 ## 4강. Template
 
-어떤 기능에 대해서 실행되어야 할 각 단계는 정해져있으나, 각각의 세부 구현은 상황에 맞게 다르게 구현할 수 있도록 하는 패턴.
+어떤 기능에 대해서 실행되어야 할 각 단계는 정해져있으나, 각각의 세부 구현은 상황에 맞게 다르게 구현할 수 있도록 하는 패턴
 
 ### 실습 클래스 다이어그램
 
@@ -534,6 +534,158 @@ name Growl
 ```
 
 변경할 수 없는 클래스를 원하는 형태의 인터페이스나 클래스로 사용하고자 할 때 Adapter 클래스를 도입하여 사용할 수 있다.
+
+<br>
+
+## 6강. Bridge
+
+기능 계층과 구현 계층의 분리로 시스템의 확장성과 유지보수성을 높이는 패턴
+![BridgePattern](https://imgur.com/flx8KfV.png)
+
+### 실습 클래스 다이어그램
+
+![bridge-class](https://imgur.com/z59fUpz.png)
+
+### 실습 코드
+
+```java
+public class Draft {
+    private String title;
+    private String author;
+    private String[] contents;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String[] getContents() {
+        return contents;
+    }
+
+    public Draft(String title, String author, String[] contents) {
+        this.title = title;
+        this.author = author;
+        this.contents = contents;
+    }
+
+    public void print(Display display) {
+        display.title(this);
+        display.author(this);
+        display.contents(this);
+    }
+}
+```
+
+```java
+public interface Display {
+    void title(Draft draft);
+    void author(Draft draft);
+    void contents(Draft draft);
+}
+```
+
+```java
+public class SimpleDisplay implements Display {
+
+    @Override
+    public void title(Draft draft) {
+        System.out.println(draft.getTitle());
+    }
+
+    @Override
+    public void author(Draft draft) {
+        System.out.println(draft.getAuthor());
+    }
+
+    @Override
+    public void contents(Draft draft) {
+        for (String content : draft.getContents()) {
+            System.out.println(content);
+        }
+    }
+}
+```
+
+```java
+public class CaptionDisplay implements Display {
+    @Override
+    public void title(Draft draft) {
+        System.out.println("제목: " + draft.getTitle());
+    }
+
+    @Override
+    public void author(Draft draft) {
+        System.out.println("저자: " + draft.getAuthor());
+    }
+
+    @Override
+    public void contents(Draft draft) {
+        System.out.println("내용: ");
+        for (String content : draft.getContents()) {
+            System.out.println("    " + content);
+        }
+    }
+}
+```
+
+```java
+public class Publication extends Draft {
+    private String publisher;
+    private int cost;
+
+    public Publication(String title, String author, String[] contents, String publisher, int cost) {
+        super(title, author, contents);
+        this.publisher = publisher;
+        this.cost = cost;
+    }
+
+    private void printPublicationInfo() {
+        System.out.println("#" + publisher + " $" + cost);
+    }
+
+    @Override
+    public void print(Display display) {
+        super.print(display);
+        printPublicationInfo();
+    }
+}
+```
+
+```java
+public class MainEntry {
+    public static void main(String[] args) {
+        String title = "복원된 지구";
+        String author = "김형준";
+        String[] contents = {
+                "플라스틱 사용의 감소와",
+                "바다 생물 어획량 감소로 인하여",
+                "지구는 복원되었다."
+        };
+
+        Draft draft = new Draft(title, author, contents);
+        Display display1 = new SimpleDisplay();
+        draft.print(display1);
+
+        Display display2 = new CaptionDisplay();
+        draft.print(display2);
+
+
+        String publisher = "북악출판";
+        int cost = 200;
+
+        Publication publication = new Publication(title, author, contents, publisher, cost);
+        publication.print(display1);
+    }
+}
+```
+
+### 핵심
+
+새로운 기능에 대해서 기존 클래스 변경 없이 추가할 수 있게 해주는 패턴
 
 <br>
 
