@@ -689,6 +689,67 @@ public class MainEntry {
 
 <br>
 
+## 7강. Singleton
+
+하나의 클래스 타입에서 오직 하나의 객체만이 생성되도록 보장하는 패턴
+
+### 실습 클래스 다이어그램
+
+![SingletonPattern](https://imgur.com/nspI0v1.png)
+
+### 실습 코드
+
+```java
+public class King {
+
+    // 생성자는 private으로 선언하여 나 자신 이외에는 아무도 생성 못하도록 한다.
+    private King() {}
+
+    private static King self = null;
+
+    // synchronized: 멀티스레드에서도 해당 메서드를 호출할 때 문제가 없도록 동기화하기 위함
+    public synchronized static King getInstance() {
+        if (self == null) {
+            self = new King();
+        }
+        return self;
+    }
+
+    public void say() {
+        System.out.println("I am only one.");
+    }
+}
+```
+
+```java
+public class MainEntry {
+
+    public static void main(String[] args) {
+        // 외부에서는 생성자를 생성할 수 없다.
+        // King king = new King();
+
+        King king = King.getInstance();
+
+        king.say();
+
+        King king2 = King.getInstance();
+        if (king == king2) {
+            System.out.println("same object");
+        } else {
+            System.out.println("different object");
+        }
+    }
+}
+```
+
+```
+> Task :MainEntry.main()
+I am only one.
+same object
+```
+
+<br>
+
 ## 📚 References
 
 - [유튜브 - Java로 보는 GoF의 디자인 패턴 강좌](https://www.youtube.com/playlist?list=PLe6NQuuFBu7FhPfxkjDd2cWnTy2y_w_jZ)
