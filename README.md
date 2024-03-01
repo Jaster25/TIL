@@ -47,6 +47,10 @@
 - [강의 - Spring Data JPA 기초](Spring/JPA/spring-data-jpa-basics.md)
 - [Entity ID를 참조 타입으로 사용하는 이유](Spring/JPA/why-entity-id–use-reference-type.md)
 
+#### Spring Batch
+
+- [Spring Batch](Spring/SpringBatch/spring-batch.md)
+
 #### Test
 
 - [강의 - 테스트 코드 적용하기(JUnit, TDD)](Spring/Test/apply-test-code-with-junit.md)
