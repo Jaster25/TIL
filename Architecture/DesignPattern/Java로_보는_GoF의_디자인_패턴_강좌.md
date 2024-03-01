@@ -750,6 +750,114 @@ same object
 
 <br>
 
+## 8강. Flyweight
+
+### Flyweight Pattern의 목적
+
+- 어떤 객체를 사용하기 위해 매번 생성하지 않고 한번만 생성하고 다시 필요해질 때는 이전에 생성된 객체를 재사용할 수 있다.
+- 객체를 생성할 때 많은 자원이 소모될 경우 플라이웨이트 패턴을 적용하여 훨씬 적은 자원만으로 필요한 객체를 재사용할 수 있다.
+
+### 실습 클래스 다이어그램
+
+![flyweight](https://imgur.com/pJRKxgO.png)
+
+### 실습 코드
+
+```java
+public class Digit {
+    private final List<String> data = new ArrayList<>();
+
+    public Digit(String filename) {
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            fr = new FileReader(filename);
+            br = new BufferedReader(fr);
+
+            for (int i = 0; i < 8; i++) {
+                data.add(br.readLine());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fr != null) fr.close();
+                if (br != null) br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void print(int x, int y) {
+        for (int i = 0; i < 8; i++) {
+            String line = data.get(i);
+            System.out.printf("%c[%d;%df", 0x1B, y + i, x);
+            System.out.print(line);
+        }
+    }
+}
+```
+
+```java
+public class DigitFactory {
+
+    private Digit[] pool = new Digit[] {
+      null, null, null
+    };
+
+    public Digit getDigit(int n) {
+        if (pool[n] != null) {
+            return pool[n];
+        } else {
+            String fileName = String.format("./%d.txt", n);
+            Digit digit = new Digit(fileName);
+            pool[n] = digit;
+            return digit;
+        }
+    }
+}
+```
+
+```java
+public class Number {
+
+    private final List<Digit> digitList = new ArrayList<>();
+
+    public Number(int number) {
+        String strNumber = Integer.toString(number);
+        int len = strNumber.length();
+
+        DigitFactory digitFactory = new DigitFactory();
+        for (int i = 0; i < len; i++) {
+            int n = Character.getNumericValue(strNumber.charAt(i));
+            Digit digit = digitFactory.getDigit(n);
+            digitList.add((digit));
+        }
+    }
+
+    public void print(int x, int y) {
+        int cntDigits = digitList.size();
+        for (int i = 0; i < cntDigits; i++) {
+            Digit digit = digitList.get(i);
+            digit.print(x + (i * 8), y);
+        }
+    }
+}
+```
+
+```java
+public class MainEntry {
+
+    public static void main(String[] args) {
+        Number number = new Number(102);
+        number.print(5, 5);
+    }
+}
+```
+
+<br>
+
 ## 📚 References
 
 - [유튜브 - Java로 보는 GoF의 디자인 패턴 강좌](https://www.youtube.com/playlist?list=PLe6NQuuFBu7FhPfxkjDd2cWnTy2y_w_jZ)
