@@ -856,6 +856,11 @@ public class MainEntry {
 }
 ```
 
+### ❓ Singleton 패턴과의 차이점
+
+- Flyweight 패턴은 불변, Singleton 패턴은 가변적
+- Singleton 패턴은 오직 하나의 인스턴스를 허용, Flyweight 패턴은 각각의 고유한 상태를 갖는 여러 인스턴스를 허용
+
 <br>
 
 ## 📚 References
