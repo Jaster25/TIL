@@ -863,6 +863,140 @@ public class MainEntry {
 
 <br>
 
+## 9강. Composite
+
+단일체와 집합체를 하나의 동일한 개념으로 처리하기 위한 패턴
+
+### 실습 다이어그램
+
+![composite-class](https://imgur.com/rtmUpIZ.png)
+
+### 실습 코드
+
+```java
+public abstract class Unit {
+
+    private String name;
+
+    public Unit(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return name + "(" + getSize() + ")";
+    }
+
+    public abstract int getSize();
+}
+```
+
+```java
+public class File extends Unit {
+
+    private int size;
+
+    public File(String name, int size) {
+        super(name);
+        this.size = size;
+    }
+
+    @Override
+    public int getSize() {
+        return size;
+    }
+}
+```
+
+```java
+public class Folder extends Unit {
+
+    private final LinkedList<Unit> unitList = new LinkedList<>();
+
+    public Folder(String name) {
+        super(name);
+    }
+
+    @Override
+    public int getSize() {
+        int size = 0;
+        Iterator<Unit> it = unitList.iterator();
+
+        while (it.hasNext()) {
+            Unit unit = it.next();
+            size += unit.getSize();
+        }
+
+        return size;
+    }
+
+    public boolean add(Unit unit) {
+        unitList.add(unit);
+        return true;
+    }
+
+    // 재귀 구문
+    private void list(String indent, Unit unit) {
+        if (unit instanceof File) {
+            System.out.println(indent + unit);
+        } else {
+            Folder dir = (Folder) unit;
+            Iterator<Unit> it = dir.unitList.iterator();
+            System.out.println(indent + "+ " + unit);
+            while (it.hasNext()) {
+                list(indent + "    ", it.next());
+            }
+        }
+    }
+
+    public void list() {
+        list("", this);
+    }
+}
+```
+
+```java
+public class MainEntry {
+
+    public static void main(String[] args) {
+        Folder root = new Folder("root");
+        root.add(new File("a.txt", 1000));
+        root.add(new File("b.txt", 2000));
+
+        Folder sub1 = new Folder("sub1");
+        root.add(sub1);
+        sub1.add(new File("sa.txt", 100));
+        sub1.add(new File("sb.txt", 4000));
+
+        Folder sub2 = new Folder("sub2");
+        root.add(sub2);
+        sub2.add(new File("SA.txt", 250));
+        sub2.add(new File("SB.txt", 340));
+
+        root.list();
+    }
+}
+```
+
+```
+> Task :MainEntry.main()
++ root(7690)
+    a.txt(1000)
+    b.txt(2000)
+    + sub1(4100)
+        sa.txt(100)
+        sb.txt(4000)
+    + sub2(590)
+        SA.txt(250)
+        SB.txt(340)
+```
+
+<br>
+
 ## 📚 References
 
 - [유튜브 - Java로 보는 GoF의 디자인 패턴 강좌](https://www.youtube.com/playlist?list=PLe6NQuuFBu7FhPfxkjDd2cWnTy2y_w_jZ)
