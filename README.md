@@ -78,6 +78,7 @@
 
 - [Key](Database/key.md)
 - [SQL vs NoSQL](Database/sql-vs-nosql.md)
+- [강의 - DB 트랜잭션 조금 이해하기](Database/DB%20트랜잭션%20조금%20이해하기.md)
 
 ## DevOps
 
