@@ -28,7 +28,7 @@
 - [동일성 vs 동등성](Java/identity-vs-equality.md)
 - [String vs StringBuilder vs StringBuffer](Java/string-vs-stringbuilder-vs-stringbuffer.md)
 - [Collection 프레임워크](Java/collection-framework.md)
-- [강의 - Generic 변성](/Java/Generic%20%E1%84%87%E1%85%A7%E1%86%AB%E1%84%89%E1%85%A5%E1%86%BC.md)
+- [강의 - Generic 변성](/Java/Generic%20변성.md)
 
 ## Spring
 
