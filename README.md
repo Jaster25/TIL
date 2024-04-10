@@ -74,6 +74,7 @@
 - [URI & URL & URN](Network/uri-url-urn.md)
 - [REST API](Network/rest-api.md)
 - [TCP vs UDP](Network/tcp-udp.md)
+- [강의 - gRPC 개념](Network/gRPC%20개념.md)
 
 ## Database
 
