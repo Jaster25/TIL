@@ -1,6 +1,6 @@
 # Java 비동기 구현하기
 
-자바에서 비동기 처리하는 방식들을 정리한다.
+자바에서 비동기 처리하는 방식을 정리한다.
 
 <br>
 
@@ -76,6 +76,50 @@ public class ThreadApplication {
 <br>
 
 ## 2. ExecutorService
+
+### Executor Service 구조
+![executor](https://imgur.com/pn7T2oq.png)
+
+### Executor Service 클래스 구조
+![executor class](https://imgur.com/yd77rLS.png)
+
+```java
+@Slf4j
+@SpringBootApplication(scanBasePackages = "com.js.studyasync.common")
+public class ExecutorServiceApplication {
+
+    public static void main(String[] args) throws InterruptedException {
+        final var context = SpringApplication.run(ExecutorServiceApplication.class, args);
+        final PlusService service = context.getBean(PlusService.class);
+        final var startTime = System.currentTimeMillis();
+        final var random = new Random();
+
+        // 고정된 사이즈의 스레드풀 생성
+        // final ExecutorService executorService = Executors.newFixedThreadPool(10);
+        // 유동적인 사이즈의 스레드풀 생성
+        final ExecutorService executorService = Executors.newCachedThreadPool();
+        // 애플리케이션 특성에 맞게 선택하자
+
+        for (int i = 0; i < 10; i++) {
+            executorService.submit(
+                    () -> service.sendRequest(random.nextInt(100), random.nextInt(100))
+            );
+        }
+
+        log.info("Main Finished, Elapsed: {}", System.currentTimeMillis() - startTime);
+        Thread.sleep(3000);
+        executorService.shutdown();
+    }
+}
+```
+
+### 추가 요구사항
+- 비동기 작업의 결과값을 받아오고 싶음
+
+<br>
+
+## 2. Future, CompletableFuture
+
 
 <br>
 
