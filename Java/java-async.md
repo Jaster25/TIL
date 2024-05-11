@@ -176,7 +176,7 @@ public class ExecutorServiceApplication {
 
 <br>
 
-## 2. Future, CompletableFuture
+## 3. Future, CompletableFuture
 
 ### Future 코드
 
@@ -428,6 +428,99 @@ public class CompletableFutureApplication3 {
 [pool-2-thread-2]: 36 + 78 = 114, Elapsed: 172
 [pool-2-thread-1]: 110 + 114 = 224, Elapsed: 108
 [pool-2-thread-1]: 224
+```
+
+<br>
+
+## 4. Spring Async
+
+- 스레드를 관리할 수 있다.
+- 여러 개의 비동기 작업의 결과물을 가지고 다시 비동기 호출할 수 있다.
+- 비동기 관리 코드와 비즈니스 코드를 분리한다.
+
+### 코드
+
+```java
+@Slf4j
+@SpringBootApplication(scanBasePackages = "com.js.studyasync.common")
+public class SpringAsyncApplication {
+
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+        final var context = SpringApplication.run(SpringAsyncApplication.class, args);
+        final PlusAsyncService service = context.getBean(PlusAsyncService.class);
+
+        final var startTime = System.currentTimeMillis();
+        final var random = new Random();
+
+        for (int i = 0; i < 10; i++) {
+            service.sendRequest(random.nextInt(100), random.nextInt(100));
+        }
+
+//        final var completableFuture1 = service.sendRequestCompletable(random.nextInt(100), random.nextInt(100));
+//        final var completableFuture2 = service.sendRequestCompletable(random.nextInt(100), random.nextInt(100));
+//
+//        completableFuture1.thenCombine(completableFuture2,
+//                                       (t1, t2) -> service.sendRequestCompletable(t1, t2))
+//                          .thenCompose(c -> c)
+//                          .thenAccept(t -> log.info(String.valueOf(t)));
+        log.info("Main Finished, Elapsed: {}", System.currentTimeMillis() - startTime);
+        context.close();
+    }
+
+    @Configuration
+    @EnableAsync
+    public static class AsyncConfiguration {
+
+        @Bean(destroyMethod = "shutdown")
+        public Executor asyncExecutor() {
+            final var executor = new ThreadPoolTaskExecutorBuilder()
+                    .corePoolSize(10)
+                    .maxPoolSize(10)
+                    .threadNamePrefix("CustomTP-")
+                    .build();
+            executor.initialize();
+
+            return executor;
+        }
+    }
+
+    @Service
+    @RequiredArgsConstructor
+    public static class PlusAsyncService {
+
+        private final PlusService plusService;
+        private final Executor asyncExecutor;
+
+        // 해당 bean에 해당하는 Executor를 가져와 비동기로 실행한다.
+        @Async("asyncExecutor")
+        public void sendRequest(int param1, int param2) {
+            plusService.sendRequest(param1, param2);
+        }
+
+        public CompletableFuture<Integer> sendRequestCompletable(int param1, int param2) {
+            return CompletableFuture.supplyAsync(() -> plusService.sendRequest(param1, param2));
+        }
+    }
+}
+```
+
+### 실행 결과
+
+```log
+[  restartedMain]: Main Finished, Elapsed: 2
+[nio-8080-exec-8]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+[nio-8080-exec-8]: Initializing Servlet 'dispatcherServlet'
+[nio-8080-exec-8]: Completed initialization in 0 ms
+[    CustomTP-10]: 32 + 99 = 131, Elapsed: 189
+[     CustomTP-5]: 89 + 96 = 185, Elapsed: 189
+[     CustomTP-3]: 50 + 37 = 87, Elapsed: 190
+[     CustomTP-7]: 60 + 62 = 122, Elapsed: 189
+[     CustomTP-2]: 26 + 74 = 100, Elapsed: 190
+[     CustomTP-9]: 34 + 53 = 87, Elapsed: 189
+[     CustomTP-8]: 44 + 87 = 131, Elapsed: 189
+[     CustomTP-6]: 71 + 68 = 139, Elapsed: 189
+[     CustomTP-1]: 49 + 98 = 147, Elapsed: 190
+[     CustomTP-4]: 33 + 66 = 99, Elapsed: 190
 ```
 
 <br>
