@@ -17,6 +17,10 @@
 
 - [강의 - Java로 보는 GoF의 디자인 패턴 강좌](Architecture/DesignPattern/Java로_보는_GoF의_디자인_패턴_강좌.md)
 
+## Practice
+
+- [실습으로 배우는 선착순 이벤트 시스템](Practice/실습으로배우는선착순이벤트시스템)
+
 ## Java
 
 - [Java 애플리케이션 실행과정](Java/java-application-execution-process.md)
@@ -85,6 +89,7 @@
 
 ## DevOps
 
+- [강의 - 면접을 위한 리눅스 명령어 top 10.md](DevOps/면접을%20위한%20리눅스%20명령어%20top%2010.md)
 - [On-premise vs Cloud](DevOps/on-premise-vs-cloud.md)
 - [IaaS vs PaaS vs SaaS](DevOps/iaas-paas-saas.md)
 - [Scale Up vs Scale Out & In](DevOps/scale-up-vs-scale-out-in.md)
