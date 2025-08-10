@@ -20,6 +20,7 @@
 ## Practice
 
 - [실습으로 배우는 선착순 이벤트 시스템](Practice/실습으로배우는선착순이벤트시스템)
+- [서킷 브레이커 실습](Practice/circuit-breaker.md)
 
 ## Java
 
