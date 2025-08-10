@@ -18,10 +18,9 @@ circuit-breaker
 │  │  ├─ dto
 │  │  │  └─ OrderDto.java
 │  │  └─ OrderController.java
+│  │  └─ ExternalController.java
 │  ├─ config
 │  │  └─ Resilience4jConfig.java
-│  ├─ external
-│  │  └─ ExternalController.java
 │  ├─ service
 │  │  └─ OrderService.java
 │  └─ CircuitBreakerApplication.java
@@ -58,28 +57,23 @@ resilience4j:
 
 #### OrderController.java
 ```java
-package com.jaster25.circuitbreaker.controller;
+package com.jaster25.circuitbreaker.api;
 
-import com.jaster25.circuitbreaker.dto.OrderDto;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import com.jaster25.circuitbreaker.api.dto.OrderDto;
+import com.jaster25.circuitbreaker.service.OrderService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
+@RequiredArgsConstructor
 public class OrderController {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final OrderService service;
 
-    @GetMapping("/order")
-    @CircuitBreaker(name = "orderService", fallbackMethod = "fallbackOrder")
-    public OrderDto placeOrder() {
-        String response = restTemplate.getForObject("http://localhost:8080/external", String.class);
-        return new OrderDto("Order completed: " + response);
-    }
-
-    public OrderDto fallbackOrder(Throwable t) {
-        return new OrderDto("Order failed - fallback executed");
+    @GetMapping("/orders")
+    public OrderDto getOrder() {
+        return service.order();
     }
 }
 ```
@@ -123,33 +117,38 @@ public class OrderService {
         );
     }
 }
+
 ```
 
 #### ExternalController.java
 ```java
-package com.jaster25.circuitbreaker.controller;
+package com.jaster25.circuitbreaker.api;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
+@RequestMapping("/external")
 public class ExternalController {
 
     private static final Logger log = LoggerFactory.getLogger(ExternalController.class);
-    private final Random random = new Random();
 
-    @GetMapping("/external")
-    public String externalApi() {
-        if (random.nextDouble() < 0.7) { // 70% 확률로 실패
-            log.error("External API failure");
-            throw new RuntimeException("External API failed");
+    @GetMapping("/process")
+    public String process() {
+        int r = ThreadLocalRandom.current().nextInt(100);
+        if (r < 70) {
+            log.warn("외부 API 에러 발생");
+            throw new RuntimeException("External API failure");
         }
-        log.info("External API success");
-        return "External API success";
+        String result = "외부 API 성공";
+        log.info(result);
+        return result;
     }
 }
 ```
@@ -159,7 +158,6 @@ public class ExternalController {
 package com.jaster25.circuitbreaker.config;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
-import io.github.resilience4j.core.registry.EntryAddedEvent;
 import io.github.resilience4j.core.registry.RegistryEventConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -175,15 +173,13 @@ public class Resilience4jConfig {
     public RegistryEventConsumer<CircuitBreaker> cbRegistryEventConsumer() {
         return new RegistryEventConsumer<>() {
             @Override
-            public void onEntryAddedEvent(EntryAddedEvent<CircuitBreaker> event) {
+            public void onEntryAddedEvent(io.github.resilience4j.core.registry.EntryAddedEvent<CircuitBreaker> event) {
                 var cb = event.getAddedEntry();
                 var name = cb.getName();
                 cb.getEventPublisher()
                         .onStateTransition(e -> log.warn("[CB:{}] state transition: {} -> {} (event: {})",
-                                name, e.getStateTransition().getFromState(),
-                                e.getStateTransition().getToState(), e.getEventType()))
-                        .onError(e -> log.warn("[CB:{}] call failed (recorded as failure): {}",
-                                name, e.getThrowable().toString()))
+                                name, e.getStateTransition().getFromState(), e.getStateTransition().getToState(), e.getEventType()))
+                        .onError(e -> log.warn("[CB:{}] call failed (recorded as failure): {}", name, e.getThrowable().toString()))
                         .onCallNotPermitted(e -> log.warn("[CB:{}] call not permitted (OPEN)", name))
                         .onSuccess(e -> log.info("[CB:{}] call success", name));
             }
