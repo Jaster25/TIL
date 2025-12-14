@@ -90,6 +90,7 @@
 
 ## DevOps
 
+- [강의 - 쿠버네티스 감잡기 - 왕초보편](DevOps/쿠버네티스%20감잡기%20-%20왕초보편.md)
 - [강의 - 면접을 위한 리눅스 명령어 top 10.md](DevOps/면접을%20위한%20리눅스%20명령어%20top%2010.md)
 - [On-premise vs Cloud](DevOps/on-premise-vs-cloud.md)
 - [IaaS vs PaaS vs SaaS](DevOps/iaas-paas-saas.md)
